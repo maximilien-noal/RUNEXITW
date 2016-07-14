@@ -46,7 +46,7 @@ begin
      begin
      repeat
            Application.ProcessMessages;
-           windowHandle := FindWindow(nil, 'JEWELS'+ #0);
+           windowHandle := FindWindow (nil, 'JEWELS'+ #0);
      until IsWindow (windowHandle) = True;
      end;
      begin
