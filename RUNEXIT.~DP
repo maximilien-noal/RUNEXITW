@@ -7,6 +7,7 @@ uses
 
 var
   h: Word;
+  windowHandle: Word;
   pathName: String;
   fileName: String;
   params: String;
@@ -40,15 +41,20 @@ begin
   params := params + #0;
 
   { Execute the command }
-  Sleep(2000);
-  h := LoadModule (@fileName [1], nil);
+  h := ShellExecute (0, nil, @fileName [1], @params [1], @pathName [1], SW_SHOWNORMAL);
   if (h >= 32) then
-  begin
-    { Wait for it to complete }
-    repeat
-      Application.ProcessMessages;
-    until GetModuleUsage (h) = 0;
-    { And shut down Windows }
-    ExitWindows (0, 0);
-  end;
+     begin
+     repeat
+           Application.ProcessMessages;
+           windowHandle := FindWindow(nil, 'JEWELS'+ #0);
+     until IsWindow (windowHandle) = True;
+     end;
+     begin
+     { Wait for the window to be destroyed }
+     repeat
+           Application.ProcessMessages;
+     until IsWindow (windowHandle) = False;
+     { And shut down Windows }
+     ExitWindows (0, 0);
+     end;
 end.
