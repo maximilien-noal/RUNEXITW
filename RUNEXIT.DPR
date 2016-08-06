@@ -1,12 +1,11 @@
 program Runexit;
 
-{$D-,I-,L-,R-,S-,Y-}
-
 uses
   Forms, ShellApi, SysUtils, WinProcs, WinTypes;
 
 var
   h: Word;
+  searchPoint: TPoint;
   windowHandle: Word;
   pathName: String;
   fileName: String;
@@ -43,10 +42,12 @@ begin
   { Execute the command }
   h := ShellExecute (0, nil, @fileName [1], @params [1], @pathName [1], SW_SHOWNORMAL);
   if (h >= 32) then
+     searchPoint.X := 320;
+     searchPoint.Y := 240;
      begin
      repeat
            Application.ProcessMessages;
-           windowHandle := FindWindow (nil, 'JEWELS'+ #0);
+           windowHandle := WindowFromPoint (searchPoint);
      until IsWindow (windowHandle) = True;
      end;
      begin
