@@ -14,7 +14,7 @@ var
 
 begin
   { Split first parameter into path and filename }
-  i := Pos ('\', ParamStr (1));
+  i := Po s ('\', ParamStr (1));
   if (i > 0) then
   begin
     { Make it a path, find last occurrence of directory separator }
@@ -40,7 +40,7 @@ begin
   params := params + #0;
 
   { Execute the command }
-  h := ShellExecute (0, nil, @fileName [1], @params [1], @pathName [1], SW_SHOWNORMAL);
+  h := ShellExecute (0, nil, @fileName [1], @params [1], @pathName [1], SW_SHOMAXIMIZED);
   if (h >= 32) then
      searchPoint.X := 320;
      searchPoint.Y := 240;
@@ -56,6 +56,6 @@ begin
            Application.ProcessMessages;
      until IsWindow (windowHandle) = False;
      { And shut down Windows }
-     ExitWindows (0, 0);
+     { ExitWindows (0, 0); }
      end;
 end.

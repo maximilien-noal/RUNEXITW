@@ -40,7 +40,7 @@ begin
   params := params + #0;
 
   { Execute the command }
-  h := ShellExecute (0, nil, @fileName [1], @params [1], @pathName [1], SW_SHOWNORMAL);
+  h := ShellExecute (0, nil, @fileName [1], @params [1], @pathName [1], SW_SHOWMAXIMIZED);
   if (h >= 32) then
      searchPoint.X := 320;
      searchPoint.Y := 240;
